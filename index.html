@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>دفتر تکالیف کلاس</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f6fb;color:#172033;font-family:Tahoma,Arial,sans-serif}
+.wrap{max-width:760px;margin:auto;padding:14px}
+.head{background:linear-gradient(135deg,#4778ee,#7558df);color:#fff;border-radius:22px;padding:20px;margin-bottom:12px}
+.head h1{margin:0 0 6px;font-size:24px}.head p{margin:0;font-size:13px}
+.panel{background:#fff;border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:0 4px 18px #17203312}
+input,select{width:100%;padding:12px;border:0;background:#f1f3f7;border-radius:12px;outline:none;font:inherit}
+.filters{display:grid;grid-template-columns:1fr 150px;gap:9px}.task{margin-top:9px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px}
+.stat{background:#fff;border-radius:16px;padding:13px;text-align:center}.num{font-size:25px;font-weight:bold}.lbl{font-size:11px;color:#667085}
+.list-title{display:flex;justify-content:space-between;margin-bottom:8px;font-weight:bold}
+.student{background:#f9fafc;border:1px solid #edf0f5;border-radius:16px;padding:12px;margin:8px 0;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.name{font-weight:bold;font-size:15px}.family{font-size:12px;color:#667085;margin-top:4px}
+.buttons{display:flex;gap:6px}button{border:0;border-radius:10px;padding:9px 10px;font:inherit;cursor:pointer}
+.yes{background:#e2f8e9;color:#087443}.no{background:#ffe5e5;color:#b42318}button.active{box-shadow:0 0 0 2px currentColor inset;font-weight:bold}
+.reset{width:100%;background:#eef1f5;color:#475467;margin-top:10px}
+@media(max-width:560px){.filters{grid-template-columns:1fr}.student{align-items:flex-start}.buttons{flex-direction:column}.buttons button{min-width:105px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="head"><h1>📚 دفتر تکالیف کلاس</h1><p>ثبت سریع وضعیت تکالیف دانش‌آموزان</p></div>
+
+<div class="panel">
+<div class="filters">
+<input id="search" placeholder="🔎 جست‌وجوی نام یا نام خانوادگی">
+<select id="filter"><option value="all">همه</option><option value="yes">✅ ارسال شده</option><option value="no">❌ ارسال نشده</option></select>
+</div>
+<input id="task" class="task" placeholder="📝 عنوان تکلیف (مثلاً ریاضی)">
+</div>
+
+<div class="stats">
+<div class="stat"><div id="total" class="num">16</div><div class="lbl">کل دانش‌آموزان</div></div>
+<div class="stat"><div id="sent" class="num">0</div><div class="lbl">ارسال کرده‌اند ✅</div></div>
+<div class="stat"><div id="missing" class="num">16</div><div class="lbl">ارسال نکرده‌اند ❌</div></div>
+</div>
+
+<div class="panel">
+<div class="list-title"><span>👩‍🎓 لیست دانش‌آموزان</span><span id="shown">16 نفر</span></div>
+<div id="list"><div class="student" data-index="0" data-search="سها دریایی صابغی">
+  <div class="info"><div class="name">سها</div><div class="family">دریایی صابغی</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="1" data-search="فریبا زارع">
+  <div class="info"><div class="name">فریبا</div><div class="family">زارع</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="2" data-search="کوثر سهیلی‌زاده">
+  <div class="info"><div class="name">کوثر</div><div class="family">سهیلی‌زاده</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="3" data-search="مریم گندمی">
+  <div class="info"><div class="name">مریم</div><div class="family">گندمی</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="4" data-search="منا ملاحی">
+  <div class="info"><div class="name">منا</div><div class="family">ملاحی</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="5" data-search="سما نجاتی‌زاده">
+  <div class="info"><div class="name">سما</div><div class="family">نجاتی‌زاده</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="6" data-search="مونا یوسفی">
+  <div class="info"><div class="name">مونا</div><div class="family">یوسفی</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="7" data-search="نسیم آتش‌روز">
+  <div class="info"><div class="name">نسیم</div><div class="family">آتش‌روز</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="8" data-search="هدا آسوده">
+  <div class="info"><div class="name">هدا</div><div class="family">آسوده</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="9" data-search="نهال ارزنگ">
+  <div class="info"><div class="name">نهال</div><div class="family">ارزنگ</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="10" data-search="مریم برخاسته">
+  <div class="info"><div class="name">مریم</div><div class="family">برخاسته</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="11" data-search="رهاب جاسمی">
+  <div class="info"><div class="name">رهاب</div><div class="family">جاسمی</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="12" data-search="سدن جاشویی">
+  <div class="info"><div class="name">سدن</div><div class="family">جاشویی</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="13" data-search="عذرا جاشویی خمیری">
+  <div class="info"><div class="name">عذرا</div><div class="family">جاشویی خمیری</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="14" data-search="مطهره خوش‌دل">
+  <div class="info"><div class="name">مطهره</div><div class="family">خوش‌دل</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div>
+<div class="student" data-index="15" data-search="فاطمه دربخش">
+  <div class="info"><div class="name">فاطمه</div><div class="family">دربخش</div></div>
+  <div class="buttons">
+    <button class="yes" type="button">✅ ارسال شد</button>
+    <button class="no active" type="button">❌ نفرستاده</button>
+  </div>
+</div></div>
+<button id="reset" class="reset" type="button">↺ پاک کردن وضعیت</button>
+</div>
+</div>
+
+<script>
+(function(){
+const list=document.getElementById("list"), search=document.getElementById("search"), filter=document.getElementById("filter");
+let state={};
+try{state=JSON.parse(localStorage.getItem("classHomeworkV3")||"{}")||{}}catch(e){state={}}
+
+function save(){try{localStorage.setItem("classHomeworkV3",JSON.stringify(state))}catch(e){}}
+
+function apply(){
+ let sent=0, shown=0;
+ const q=search.value.trim().toLowerCase(), f=filter.value;
+ document.querySelectorAll(".student").forEach(function(card){
+   const i=card.getAttribute("data-index");
+   const status=state[i]||"no";
+   const text=card.getAttribute("data-search").toLowerCase();
+   const visible=(!q||text.indexOf(q)>=0)&&(f==="all"||status===f);
+   card.style.display=visible?"flex":"none";
+   if(visible) shown++;
+   card.querySelector(".yes").classList.toggle("active",status==="yes");
+   card.querySelector(".no").classList.toggle("active",status==="no");
+   if(status==="yes") sent++;
+ });
+ document.getElementById("total").textContent="16";
+ document.getElementById("sent").textContent=sent;
+ document.getElementById("missing").textContent=16-sent;
+ document.getElementById("shown").textContent=shown+" نفر";
+}
+
+document.querySelectorAll(".student").forEach(function(card){
+ const i=card.getAttribute("data-index");
+ card.querySelector(".yes").addEventListener("click",function(){state[i]="yes";save();apply()});
+ card.querySelector(".no").addEventListener("click",function(){state[i]="no";save();apply()});
+});
+search.addEventListener("input",apply); filter.addEventListener("change",apply);
+document.getElementById("reset").addEventListener("click",function(){
+ if(confirm("وضعیت همه دانش‌آموزان پاک شود؟")){state={};save();apply()}
+});
+apply();
+})();
+</script>
+</body>
+</html>
